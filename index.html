@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Muslims in Tech</title>
+    <meta
+      name="description"
+      content="A community platform connecting Muslims across technology, founders, learning, events, podcasts, discussions, and opportunities."
+    />
+    <link rel="icon" type="image/png" href="assets/mitWhite.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      const savedTheme = localStorage.getItem("mit-theme");
+      if (savedTheme) {
+        document.documentElement.dataset.theme = savedTheme;
+      } else {
+        document.documentElement.dataset.theme = "dark";
+      }
+    </script>
+  </head>
+  <body>
+    <div class="splash-screen" id="splash-screen" aria-hidden="true">
+      <img src="assets/mit_logo.png" alt="" />
+    </div>
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="Muslims in Tech home">
+        <span class="brand-muslims">muslims</span>
+        <span class="brand-tech">In Tech</span>
+      </a>
+      <nav id="main-nav" class="main-nav" aria-label="Main navigation">
+        <a href="#community">Community</a>
+        <a href="#blogs">Blogs</a>
+        <a href="#events">Events</a>
+        <a href="#discussions">Discussions</a>
+        <a href="#companies">Companies</a>
+        <a href="#founders">Founder needs</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" type="button" aria-label="Toggle theme">
+          <span class="theme-option theme-sun">☀</span>
+            <span class="theme-option theme-moon">☾</span>
+          <span class="theme-indicator"></span>
+        </button>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="hero">
+        <div class="hero-overlay">
+          <div class="hero-copy">
+            <p class="eyebrow">Faith. Skill. Service.</p>
+            <h1>Muslims in Tech</h1>
+            <p>
+              A shared space for Muslim builders, students, designers, engineers, founders,
+              researchers, creators, and mentors across every generation.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#join">Join the community</a>
+              <a class="button button-secondary" href="#linkedin">Verify with LinkedIn</a>
+            </div>
+          </div>
+          <div class="hero-media" aria-hidden="true">
+            <img class="hero-logo hero-logo-light" src="assets/mitWhite.png" alt="" />
+            <img class="hero-logo hero-logo-dark" src="assets/mitBlack.png" alt="" />
+          </div>
+        </div>
+      </section>
+
+      <section id="community" class="section section-intro">
+        <div class="section-heading">
+          <p class="eyebrow">Community Network</p>
+          <h2>Connect with Muslims working across technology</h2>
+        </div>
+        <div class="stat-grid" aria-label="Community highlights">
+          <article>
+            <strong>Mentorship</strong>
+            <span>Students, career switchers, and senior professionals.</span>
+          </article>
+          <article>
+            <strong>Collaboration</strong>
+            <span>Project builders, founders, open-source contributors, and creators.</span>
+          </article>
+          <article>
+            <strong>Opportunities</strong>
+            <span>Roles, internships, advisory needs, and startup requirements.</span>
+          </article>
+        </div>
+      </section>
+
+      <section id="linkedin" class="section split-section">
+        <div>
+          <p class="eyebrow">LinkedIn Verification</p>
+          <h2>Start with a professional identity</h2>
+          <p>
+            Signups can require a LinkedIn profile link, giving the community a practical
+            verification step before deeper social features are added.
+          </p>
+        </div>
+        <form class="panel form-panel" id="signup-form">
+          <label for="full-name">Full name</label>
+          <input id="full-name" name="fullName" type="text" placeholder="Your name" required />
+          <label for="linkedin-url">LinkedIn profile</label>
+          <input
+            id="linkedin-url"
+            name="linkedinUrl"
+            type="url"
+            placeholder="https://www.linkedin.com/in/your-profile"
+            required
+          />
+          <label for="track">Primary track</label>
+          <select id="track" name="track">
+            <option>Software engineering</option>
+            <option>Data and AI</option>
+            <option>Product and design</option>
+            <option>Cybersecurity</option>
+            <option>Founder or operator</option>
+            <option>Student or learner</option>
+          </select>
+          <button class="button button-primary" type="submit">Request access</button>
+          <p class="form-status" id="signup-status" role="status"></p>
+        </form>
+      </section>
+
+      <section id="blogs" class="section">
+        <div class="section-heading row-heading">
+          <div>
+            <p class="eyebrow">Tech Writing</p>
+            <h2>Blogs by Muslim technologists</h2>
+          </div>
+          <a href="#join" class="text-link">Submit an article</a>
+        </div>
+        <div class="card-grid" id="blog-list"></div>
+      </section>
+
+      <section id="events" class="section tinted">
+        <div class="section-heading row-heading">
+          <div>
+            <p class="eyebrow">Events and Shows</p>
+            <h2>Schedules for learning, networking, and live tech conversations</h2>
+          </div>
+          <a href="#join" class="text-link">Suggest an event</a>
+        </div>
+        <div class="timeline" id="event-list"></div>
+      </section>
+
+      <section id="podcasts" class="section media-section">
+        <div class="section-heading">
+          <p class="eyebrow">YouTube Podcasts</p>
+          <h2>Tech conversations from Muslim creators</h2>
+        </div>
+        <div class="video-grid" id="podcast-list"></div>
+      </section>
+
+      <section id="discussions" class="section split-section discussions-layout">
+        <div>
+          <p class="eyebrow">Discussion Rooms</p>
+          <h2>Talk through technology topics with people who understand the journey</h2>
+          <div class="topic-tabs" id="topic-tabs" aria-label="Discussion topics"></div>
+        </div>
+        <div class="panel">
+          <div class="discussion-list" id="discussion-list"></div>
+        </div>
+      </section>
+
+      <section id="companies" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Muslim-Built Companies</p>
+          <h2>Startups, products, and organizations solving meaningful problems</h2>
+        </div>
+        <div class="company-grid" id="company-list"></div>
+      </section>
+
+      <section id="founders" class="section tinted">
+        <div class="section-heading row-heading">
+          <div>
+            <p class="eyebrow">Founder Requirements</p>
+            <h2>Needs posted by founders, CEOs, and community operators</h2>
+          </div>
+          <a href="#join" class="text-link">Post a requirement</a>
+        </div>
+        <div class="requirement-list" id="requirement-list"></div>
+      </section>
+
+      <section id="about" class="section about-section">
+        <div class="section-heading">
+          <p class="eyebrow">About Us</p>
+          <h2>Built for belonging, growth, and serious technical ambition</h2>
+        </div>
+        <p>
+          Muslims in Tech is envisioned as a professional and social community where Muslims
+          in technology can discover peers, share knowledge, attend events, publish ideas,
+          discuss emerging fields, support Muslim-led companies, and open doors for one another.
+        </p>
+      </section>
+
+      <section id="join" class="section join-section">
+        <div>
+          <p class="eyebrow">Stay Connected</p>
+          <h2>Join the community for future launches</h2>
+          <p>
+            Leave your details to follow the project as it grows into a full platform with
+            profiles, authentication, posting, moderation, and member directories.
+          </p>
+        </div>
+        <form class="panel form-panel" id="join-form">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required />
+          <label for="interest">I am most interested in</label>
+          <select id="interest" name="interest">
+            <option>Networking</option>
+            <option>Mentorship</option>
+            <option>Events</option>
+            <option>Podcast appearances</option>
+            <option>Startup support</option>
+            <option>Hiring or partnerships</option>
+          </select>
+          <button class="button button-primary" type="submit">Join waitlist</button>
+          <p class="form-status" id="join-status" role="status"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <img src="assets/mitWhite.png" alt="Muslims in Tech logo" />
+        <p>Connecting faith-conscious technologists across generations.</p>
+      </div>
+      <nav class="social-links" aria-label="Social media links">
+        <a href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://www.youtube.com" target="_blank" rel="noreferrer">YouTube</a>
+        <a href="https://www.instagram.com" target="_blank" rel="noreferrer">Instagram</a>
+        <a href="https://www.x.com" target="_blank" rel="noreferrer">X</a>
+      </nav>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
