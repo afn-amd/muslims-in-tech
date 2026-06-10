@@ -478,7 +478,8 @@ a {
   }
 
   .hero-earth {
-    margin-top: 0;
+    margin-top: -120px; /* move earth upward */
+    width: 140vw;       /* slightly larger for mobile */
   }
 }
 
