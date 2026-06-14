@@ -121,10 +121,29 @@ const splashScreen = document.querySelector("#splash-screen");
 if (splashScreen) {
   document.body.classList.add("splash-active");
 
-  window.setTimeout(() => {
-    splashScreen.classList.add("hidden");
-    document.body.classList.remove("splash-active");
-  }, 1000);
+  const MIN_VISIBLE = 1000; // keep the splash up at least this long to avoid a flash
+  const MAX_VISIBLE = 4000; // never block the page longer than this on slow connections
+  const startedAt = Date.now();
+  let dismissed = false;
+
+  const hideSplash = () => {
+    if (dismissed) return;
+    dismissed = true;
+    const remaining = Math.max(0, MIN_VISIBLE - (Date.now() - startedAt));
+    window.setTimeout(() => {
+      splashScreen.classList.add("hidden");
+      document.body.classList.remove("splash-active");
+    }, remaining);
+  };
+
+  // Wait for the page (incl. the logo) to load so the splash never shows a
+  // half-downloaded image, but cap the wait so a slow network can't trap users.
+  if (document.readyState === "complete") {
+    hideSplash();
+  } else {
+    window.addEventListener("load", hideSplash);
+  }
+  window.setTimeout(hideSplash, MAX_VISIBLE);
 
   splashScreen.addEventListener("transitionend", () => {
     splashScreen.remove();
